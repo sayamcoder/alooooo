@@ -1,0 +1,24 @@
+<aside class="admin-sidebar">
+    <a href="/" class="logo" style="margin-bottom: 2rem;">
+        <i class="fa-solid fa-cloud"></i> NexoraCloud <span style="font-size: 0.75rem; background: var(--primary); padding: 0.2rem 0.5rem; border-radius: 50px;">ADMIN</span>
+    </a>
+    
+    <nav class="admin-nav">
+        <a href="/admin/dashboard" class="admin-nav-item <%= activePage === 'dashboard' ? 'active' : '' %>">
+            <i class="fa-solid fa-chart-line"></i> Dashboard
+        </a>
+        <a href="/admin/categories" class="admin-nav-item <%= activePage === 'categories' ? 'active' : '' %>">
+            <i class="fa-solid fa-layer-group"></i> Categories
+        </a>
+        <a href="/admin/plans" class="admin-nav-item <%= activePage === 'plans' ? 'active' : '' %>">
+            <i class="fa-solid fa-server"></i> Game Plans
+        </a>
+        <a href="/admin/settings" class="admin-nav-item <%= activePage === 'settings' ? 'active' : '' %>">
+            <i class="fa-solid fa-gears"></i> Redirect Editor
+        </a>
+    </nav>
+
+    <div style="margin-top: auto;">
+        <a href="/logout" class="admin-nav-item" style="color: #f43f5e;"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+    </div>
+</aside>

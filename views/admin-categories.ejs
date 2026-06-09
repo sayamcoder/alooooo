@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories Panel | NexoraCloud</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <%- include('partials/admin-sidebar', { activePage: 'categories' }) %>
+
+        <main class="admin-main">
+            <header style="margin-bottom: 3rem;">
+                <h1 style="font-size: 1.8rem; font-weight: 700;">Dynamic Category Management</h1>
+                <p style="color: var(--text-muted);">Create, Edit, and Delete structural billing categories.</p>
+            </header>
+
+            <% if (success_msg && success_msg.length > 0) { %>
+                <div class="alert-admin"><i class="fa-solid fa-circle-check"></i> <%= success_msg %></div>
+            <% } %>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+                <div class="power-card" style="padding: 2.5rem; height: max-content;">
+                    <h2 style="font-size: 1.3rem; margin-bottom: 1.5rem;">Create New Category</h2>
+                    <form action="/admin/categories" method="POST">
+                        <div class="form-group-admin">
+                            <label for="name">Category Name</label>
+                            <input type="text" id="name" name="name" required placeholder="Example: Ryzen 9 Extremes">
+                        </div>
+                        <div class="form-group-admin">
+                            <label for="description">Subheading Description</label>
+                            <input type="text" id="description" name="description" placeholder="Example: NEXORACLOUD EXTREME AMD GAME SERVERS">
+                        </div>
+                        <button type="submit" class="btn-primary" style="border: none; padding: 0.8rem 1.5rem; font-size: 0.9rem; border-radius: 8px;">Create Category</button>
+                    </form>
+                </div>
+
+                <div class="power-card" style="padding: 2.5rem;">
+                    <h2 style="font-size: 1.3rem; margin-bottom: 1.5rem;">Active Category List</h2>
+                    <ul style="list-style: none;">
+                        <% categories.forEach(cat => { %>
+                            <li style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 1rem;">
+                                <div>
+                                    <h4 style="font-size: 1rem; font-weight: 700;"><%= cat.name %></h4>
+                                    <p style="font-size: 0.8rem; color: var(--text-muted);">Slug: <%= cat.slug %></p>
+                                </div>
+                                <form action="/admin/categories/delete/<%= cat.id %>" method="POST">
+                                    <button type="submit" style="background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.3); color: #f43f5e; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.8rem; cursor: pointer;">Delete</button>
+                                </form>
+                            </li>
+                        <% }) %>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plans Panel | NexoraCloud</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <%- include('partials/admin-sidebar', { activePage: 'plans' }) %>
+
+        <main class="admin-main">
+            <header style="margin-bottom: 3rem;">
+                <h1 style="font-size: 1.8rem; font-weight: 700;">Plans Management</h1>
+                <p style="color: var(--text-muted);">Create and delete Minecraft server packages mapped to dynamic categories.</p>
+            </header>
+
+            <% if (success_msg && success_msg.length > 0) { %>
+                <div class="alert-admin"><i class="fa-solid fa-circle-check"></i> <%= success_msg %></div>
+            <% } %>
+
+            <div style="display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 3rem;">
+                <!-- Add Plan -->
+                <div class="power-card" style="padding: 2.5rem; height: max-content;">
+                    <h2 style="font-size: 1.3rem; margin-bottom: 1.5rem;">Add Game Plan</h2>
+                    <form action="/admin/plans" method="POST">
+                        <div class="form-group-admin">
+                            <label for="category_slug">Assign Category</label>
+                            <select id="category_slug" name="category_slug" required>
+                                <% categories.forEach(cat => { %>
+                                    <option value="<%= cat.slug %>"><%= cat.name %></option>
+                                <% }) %>
+                            </select>
+                        </div>
+                        <div class="form-group-admin">
+                            <label for="name">Plan Name</label>
+                            <input type="text" id="name" name="name" required placeholder="Example: 8GB PLAN">
+                        </div>
+                        <div class="form-group-admin">
+                            <label for="price">Plan Price</label>
+                            <input type="text" id="price" name="price" required placeholder="Example: ₹160">
+                        </div>
+                        <div class="form-group-admin">
+                            <label for="features">Plan Features (One per line)</label>
+                            <textarea id="features" name="features" required placeholder="RAM 8GB DDR5&#10;CPU 250% High Frequency&#10;Storage 40GB NVMe" style="width:100%; height: 120px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 8px; color: white; resize: none;"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary" style="border: none; padding: 0.8rem 1.5rem; font-size: 0.9rem; border-radius: 8px;">Create Plan</button>
+                    </form>
+                </div>
+
+                <!-- Plans List -->
+                <div class="power-card" style="padding: 2.5rem;">
+                    <h2 style="font-size: 1.3rem; margin-bottom: 1.5rem;">Active Game Server Plans</h2>
+                    <% categories.forEach(cat => { %>
+                        <div style="margin-bottom: 2rem;">
+                            <h3 style="text-transform: uppercase; font-size: 0.85rem; color: var(--primary); margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.3rem;"><%= cat.name %></h3>
+                            <ul style="list-style: none;">
+                                <% const catPlans = plans.filter(p => p.category_slug === cat.slug); %>
+                                <% if (catPlans.length === 0) { %>
+                                    <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 1rem;">No plans created under this category.</p>
+                                <% } %>
+                                <% catPlans.forEach(plan => { %>
+                                    <li style="display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 0.5rem;">
+                                        <span style="font-size: 0.85rem; font-weight: 600;"><%= plan.name %> (<%= plan.price %>)</span>
+                                        <form action="/admin/plans/delete/<%= plan.id %>" method="POST">
+                                            <button type="submit" style="background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.3); color: #f43f5e; padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.75rem; cursor: pointer;">Delete</button>
+                                        </form>
+                                    </li>
+                                <% }) %>
+                            </ul>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

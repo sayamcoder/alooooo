@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect Settings | NexoraCloud</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <%- include('partials/admin-sidebar', { activePage: 'settings' }) %>
+
+        <main class="admin-main">
+            <header style="margin-bottom: 3rem;">
+                <h1 style="font-size: 1.8rem; font-weight: 700;">Redirect Link Editor</h1>
+                <p style="color: var(--text-muted);">Change the target link of checkout/buy buttons on-the-fly.</p>
+            </header>
+
+            <% if (success_msg && success_msg.length > 0) { %>
+                <div class="alert-admin"><i class="fa-solid fa-circle-check"></i> <%= success_msg %></div>
+            <% } %>
+
+            <div class="power-card" style="padding: 2.5rem; max-width: 600px;">
+                <h2 style="font-size: 1.3rem; margin-bottom: 1.5rem;"><i class="fa-solid fa-link" style="color: var(--primary);"></i> Checkout Redirect Target</h2>
+                <form action="/admin/settings/redirect" method="POST">
+                    <div class="form-group-admin">
+                        <label for="buy_redirect_link">Dynamic Global Redirect Link</label>
+                        <input type="url" id="buy_redirect_link" name="buy_redirect_link" value="<%= buyRedirectLink %>" required placeholder="https://discord.gg/7bCXccejH9">
+                        <p style="color: var(--text-muted); font-size: 0.75rem; margin-top: 0.5rem; line-height: 1.4;">
+                            * Every pricing plan purchase button and call-to-action button on the landing page will automatically forward users to this exact URL.
+                        </p>
+                    </div>
+                    <button type="submit" class="btn-primary" style="border: none; padding: 0.8rem 1.5rem; font-size: 0.9rem; border-radius: 8px;">Save Settings</button>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

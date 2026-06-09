@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | NexoraCloud</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <%- include('partials/admin-sidebar', { activePage: 'dashboard' }) %>
+
+        <main class="admin-main">
+            <header style="margin-bottom: 3rem;">
+                <h1 style="font-size: 1.8rem; font-weight: 700;">Infrastructure Dashboard</h1>
+                <p style="color: var(--text-muted);">Manage NexoraCloud system states.</p>
+            </header>
+
+            <% if (success_msg && success_msg.length > 0) { %>
+                <div class="alert-admin"><i class="fa-solid fa-circle-check"></i> <%= success_msg %></div>
+            <% } %>
+
+            <div class="admin-stats-row">
+                <div class="admin-stat-card">
+                    <h5>Registered Users</h5>
+                    <div class="num"><%= stats.totalUsers %></div>
+                </div>
+                <div class="admin-stat-card">
+                    <h5>Categories Supported</h5>
+                    <div class="num"><%= stats.totalCategories %></div>
+                </div>
+                <div class="admin-stat-card">
+                    <h5>Active Hosting Plans</h5>
+                    <div class="num"><%= stats.totalPlans %></div>
+                </div>
+            </div>
+
+            <!-- Announcements Form -->
+            <div class="power-card" style="padding: 2.5rem; margin-top: 2rem;">
+                <h2 style="font-size: 1.3rem; margin-bottom: 1.5rem;"><i class="fa-solid fa-bullhorn" style="color: var(--primary);"></i> Publish Global Banner Announcement</h2>
+                <form action="/admin/announcements" method="POST">
+                    <div class="form-group-admin">
+                        <label for="content">Banner Content</label>
+                        <input type="text" id="content" name="content" required placeholder="Example: 🔥 FLASH SALE: 20% OFF all Ryzen plans! Code: RYZEN20" style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 8px; color: white;">
+                    </div>
+                    <button type="submit" class="btn-primary" style="border: none; padding: 0.8rem 1.5rem; font-size: 0.9rem; border-radius: 8px;">Publish Banner</button>
+                </form>
+
+                <h3 style="margin-top: 3rem; font-size: 1rem; color: var(--text-muted); border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1rem;">Active Announcements</h3>
+                <% if (announcements.length === 0) { %>
+                    <p style="color: var(--text-muted); font-size: 0.85rem;">No banner announcements published.</p>
+                <% } %>
+                <ul style="list-style: none;">
+                    <% announcements.forEach(item => { %>
+                        <li style="display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 1rem; background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 0.5rem;">
+                            <span style="font-size: 0.9rem;"><%= item.content %></span>
+                            <form action="/admin/announcements/delete/<%= item.id %>" method="POST">
+                                <button type="submit" style="background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.3); color: #f43f5e; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.8rem; cursor: pointer;">Remove</button>
+                            </form>
+                        </li>
+                    <% }) %>
+                </ul>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

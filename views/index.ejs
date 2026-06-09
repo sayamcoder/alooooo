@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexoraCloud | Premium Game & Dedicated Servers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <!-- DYNAMIC ANNOUNCEMENT BANNER -->
+    <% if (announcements && announcements.length > 0) { %>
+        <div style="background: linear-gradient(90deg, #9d34ff, #ff007a); color: white; padding: 0.6rem 1rem; text-align: center; font-size: 0.85rem; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 0.5rem; letter-spacing: 0.5px; position: sticky; top: 0; z-index: 99;">
+            <i class="fa-solid fa-bullhorn" style="animation: float 2s infinite;"></i> <%= announcements[0].content %>
+        </div>
+    <% } %>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <a href="/" class="logo">
+                <i class="fa-solid fa-cloud"></i> NexoraCloud
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Game Servers</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+            <div class="header-actions">
+                <div class="lang-select" style="background: rgba(255,255,255,0.03); padding: 0.4rem 0.8rem; border-radius: 50px; border: 1px solid var(--border-color);">
+                    <img src="https://flagcdn.com/w20/gb.png" alt="EN" width="16" style="border-radius: 2px;"> EN <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 4px;"></i>
+                </div>
+                
+                <!-- DYNAMIC AUTHENTICATION UI -->
+                <% if (user) { %>
+                    <span style="color: var(--text-muted); font-size: 0.85rem; font-weight: 500; margin-right: 10px;">
+                        <i class="fa-solid fa-user" style="color: var(--primary);"></i> <%= user.username %>
+                    </span>
+                    <% if (user.username.toLowerCase() === "admin@nexoracloud.com") { %>
+                        <a href="/admin/dashboard" class="btn-primary-small" style="background: var(--primary); margin-right: 10px;">Admin Panel</a>
+                    <% } %>
+                    <a href="/logout" class="btn-primary-small" style="background: rgba(244, 63, 94, 0.1); border: 1px solid rgba(244, 63, 94, 0.4); color: #f43f5e;">Logout</a>
+                <% } else { %>
+                    <a href="/login" class="btn-small">Sign In</a>
+                    <a href="/register" class="btn-primary-small">Get Started</a>
+                <% } %>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-left reveal">
+                <div class="badge">
+                    <i class="fa-solid fa-server"></i> Reliable & Affordable Game Servers
+                </div>
+                <h1>Best Minecraft Server Solutions For You</h1>
+                <p class="hero-desc">Power your online community with High-Performance Game Servers. Unleash unparalleled speed, enterprise DDoS security, & lag-free gameplay for your players.</p>
+                <div class="hero-btns">
+                    <a href="#pricing" class="btn-primary">View Plans <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="https://discord.gg/7bCXccejH9" target="_blank" rel="noopener noreferrer" class="btn-outline">Support Center <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="hero-right reveal">
+                <div class="globe-scene">
+                    <div class="globe-wrapper">
+                        <div class="globe-ring"></div><div class="globe-ring"></div><div class="globe-ring"></div><div class="globe-ring"></div><div class="globe-ring"></div>
+                        <div class="node-container">
+                            <div class="node-label label-england"><div class="node-dot"></div> England</div>
+                            <div class="node-label label-india"><div class="node-dot"></div> India</div>
+                            <div class="node-label label-singapore"><div class="node-dot"></div> Singapore</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Card -->
+        <div class="stats-card reveal">
+            <div class="stats-card-text">
+                Deploy, manage, and scale your gaming communities on a resilient & <span class="text-purple">High-Performance Cloud Ecosystem.</span>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-item"><h3>20+</h3><p>Years of combined experience<br>in Server Hosting</p></div>
+                <div class="stat-item"><h3>99.9%</h3><p>Guaranteed Uptime for<br>all your game servers</p></div>
+                <div class="stat-item"><h3>25K+</h3><p>Happy players hosted<br>globally on our network</p></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Network Map -->
+    <section class="network-section reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="badge"><i class="fa-solid fa-earth-americas"></i> Global Infrastructure</span>
+                <h2>Ultra-Low Latency Worldwide</h2>
+                <p>We strategically place our hardware in premium data centers around the globe to ensure you and your players get the lowest ping possible.</p>
+            </div>
+            <div class="map-container">
+                <div class="pulse-node loc-1" title="North America"></div>
+                <div class="pulse-node loc-2" title="Europe"></div>
+                <div class="pulse-node loc-3" title="India"></div>
+                <div class="pulse-node loc-4" title="Singapore"></div>
+                <div class="map-overlay-text"><h3>&lt; 20ms</h3><p>Average Regional Latency</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Power Section -->
+    <section class="platform-power reveal" id="features">
+        <div class="container">
+            <div class="power-card">
+                <div class="power-content">
+                    <h2>The Power of Dedicated Hardware</h2>
+                    <p>We don't cut corners. Our servers run on top-tier enterprise hardware, ensuring your Minecraft server processes chunks, redstone, and entities faster than ever before.</p>
+                    <div class="hardware-tags">
+                        <div class="hw-tag amd"><i class="devicon-redhat-plain"></i> AMD Ryzen™ 9 7950X</div>
+                        <div class="hw-tag amd"><i class="devicon-redhat-plain"></i> AMD EPYC™ 9V14</div>
+                        <div class="hw-tag"><i class="fa-solid fa-memory"></i> DDR5 ECC Memory</div>
+                        <div class="hw-tag"><i class="fa-solid fa-hard-drive"></i> PCIe Gen4 NVMe</div>
+                    </div>
+                    <button class="btn-primary" style="display: inline-flex; width: max-content;">See Hardware Benchmarks <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem; margin-left: 0.5rem;"></i></button>
+                </div>
+                <div class="power-visual">
+                    <div class="grid-plane"></div>
+                    <div class="floating-badge badge-1"><i class="fa-solid fa-bolt"></i> 5.7 GHz Max Boost</div>
+                    <div class="floating-badge badge-2"><i class="fa-solid fa-microchip"></i> Unrestricted Threads</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Features Bento -->
+    <section class="features-section reveal">
+        <div class="container">
+            <div class="section-header">
+                <h2>Everything you need to run a server</h2>
+                <p>Premium features included out-of-the-box with every plan.</p>
+            </div>
+            <div class="bento-grid">
+                <div class="bento-card">
+                    <div class="bento-icon icon-green"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h4>17Tbps DDoS Protection</h4>
+                    <p>Enterprise-grade mitigation paths protect your server from Layer 3, 4, and 7 attacks, keeping you online 24/7.</p>
+                </div>
+                <div class="bento-card">
+                    <div class="bento-icon icon-purple"><i class="fa-solid fa-bolt"></i></div>
+                    <h4>Instant Provisioning</h4>
+                    <p>Your server is automatically set up and ready to play within 60 seconds of your payment being confirmed.</p>
+                </div>
+                <div class="bento-card">
+                    <div class="bento-icon icon-orange"><i class="fa-solid fa-database"></i></div>
+                    <h4>Free MySQL Databases</h4>
+                    <p>Easily link plugins like LuckPerms, CoreProtect, and more with included fast MySQL database slots.</p>
+                </div>
+                <div class="bento-card">
+                    <div class="bento-icon icon-blue"><i class="fa-solid fa-server"></i></div>
+                    <h4>Server Splitter</h4>
+                    <p>Run multiple servers (like a proxy and sub-servers) from a single powerful plan using our intuitive splitter.</p>
+                </div>
+                <div class="bento-card">
+                    <div class="bento-icon icon-red"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                    <h4>Off-site Backups</h4>
+                    <p>Never lose your world. We provide generous backup slots that securely store your data off-site.</p>
+                </div>
+                <div class="bento-card">
+                    <div class="bento-icon icon-yellow"><i class="fa-solid fa-headset"></i></div>
+                    <h4>24/7 Expert Support</h4>
+                    <p>Our dedicated team of Minecraft experts is available around the clock via Ticket and Discord.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Panel Ecosystem -->
+    <section class="os-section reveal">
+        <div class="container">
+            <div class="ecosystem-grid">
+                <div class="eco-content">
+                    <span class="badge"><i class="fa-solid fa-gamepad"></i> Game Control Panel</span>
+                    <h2>Total control at your fingertips</h2>
+                    <p>Manage your server effortlessly with our highly customized, premium game panel. Whether you're a beginner or a DevOps expert, we give you the tools you need.</p>
+                    <ul>
+                        <li><i class="fa-solid fa-box-open"></i> 1-Click Modpack & Plugin Installers</li>
+                        <li><i class="fa-solid fa-terminal"></i> Full Console & FTP Access</li>
+                        <li><i class="fa-solid fa-users-gear"></i> Sub-user Management</li>
+                        <li><i class="fa-solid fa-calendar-check"></i> Scheduled Tasks (Auto-restarts, Backups)</li>
+                    </ul>
+                </div>
+                <div class="eco-visual">
+                    <div class="panel-preview">
+                        <div class="panel-header">
+                            <div class="mac-btn mac-red"></div><div class="mac-btn mac-yellow"></div><div class="mac-btn mac-green"></div>
+                        </div>
+                        <div class="panel-body">
+                            <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 8px;">
+                                <div style="color: var(--text-muted); font-size: 0.8rem;">CPU Usage</div>
+                                <div style="font-size: 1.5rem; font-weight: bold;">32.5%</div>
+                                <div class="dummy-chart"><div class="dummy-fill" style="width: 32.5%"></div></div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 8px;">
+                                <div style="color: var(--text-muted); font-size: 0.8rem;">RAM Usage</div>
+                                <div style="font-size: 1.5rem; font-weight: bold;">4.2 / 8 GB</div>
+                                <div class="dummy-chart"><div class="dummy-fill" style="width: 55%; background: #38bdf8;"></div></div>
+                            </div>
+                            <div style="grid-column: span 2; background: #000; padding: 1rem; border-radius: 8px; font-family: monospace; font-size: 0.8rem; color: #a1a1aa;">
+                                <span style="color: #22c55e;">[Server thread/INFO]:</span> Done (3.214s)! For help, type "help"<br>
+                                <span style="color: #22c55e;">[Server thread/INFO]:</span> Player joined the game.<br>
+                                &gt; _
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DYNAMIC MINECRAFT PRICING SECTION -->
+    <section class="pricing-section reveal" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <span class="badge"><i class="fa-solid fa-tags"></i> Game Server Hosting</span>
+                <h2>NexoraCloud Game Plans</h2>
+                <p>Choose the perfect tier for your community size. Upgrade or downgrade instantly at any time.</p>
+            </div>
+
+            <!-- Tabs -->
+<!-- REPLACE THIS SYSTEM IN views/index.ejs UNDER <div class="pricing-tabs"> -->
+
+            <!-- Tabs Rendered dynamically from Database -->
+            <div class="pricing-tabs">
+                <% categories.forEach((cat, index) => { %>
+                    <button class="tab-btn <%= index === 0 ? 'active' : '' %>" onclick="switchTab('<%= cat.slug %>')">
+                        <%= cat.name %>
+                    </button>
+                <% }) %>
+            </div>
+
+            <!-- Dynamic Category Content Rendered from Database -->
+            <% categories.forEach((cat, index) => { %>
+                <div class="tab-content <%= index === 0 ? 'active' : '' %>" id="<%= cat.slug %>">
+                    <p class="plan-subtitle"><%= cat.description || cat.name.toUpperCase() %></p>
+                    <div class="game-plans-grid">
+                        <% const catPlans = plans.filter(p => p.category_slug === cat.slug); %>
+                        <% if (catPlans.length === 0) { %>
+                            <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; grid-column: span 3; padding: 2rem;">No plans configured for this category yet.</p>
+                        <% } %>
+                        <% catPlans.forEach(plan => { %>
+                            <div class="game-plan-card">
+                                <div class="plan-header">
+                                    <h3><i class="fa-solid fa-cube tier-3"></i> <%= plan.name %></h3>
+                                    <div class="plan-price"><%= plan.price %><span>/mo</span></div>
+                                </div>
+                                <ul class="plan-features">
+                                    <% plan.features.split('\n').forEach(feature => { %>
+                                        <% if (feature.trim()) { %>
+                                            <li><i class="fa-solid fa-check"></i> <%= feature %></li>
+                                        <% } %>
+                                    <% }) %>
+                                </ul>
+                                <a href="<%= buyRedirectLink %>" target="_blank" rel="noopener noreferrer" class="btn-outline" style="text-align: center;">Order Now</a>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+            <% }) %>
+
+            <!-- Common Features -->
+            <div class="common-features">
+                <span><i class="fa-solid fa-shield-halved"></i> Premium DDoS Protection</span>
+                <span><i class="fa-solid fa-bolt"></i> Instant Setup</span>
+                <span><i class="fa-solid fa-clock"></i> 99.9% Uptime Guarantee</span>
+                <span><i class="fa-solid fa-gamepad"></i> Optimized For Minecraft & Games</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="badge"><i class="fa-solid fa-star"></i> Trusted by Owners</span>
+                <h2>What our clients say</h2>
+            </div>
+            <div class="testi-grid">
+                <div class="review-card">
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="review-text">"Switched our 100+ player SMP to NexoraCloud's Ryzen plans and the TPS hasn't dropped below 20.0 once. Absolutely insane performance for the price."</p>
+                    <div class="user-profile"><img src="https://i.pravatar.cc/150?img=11" alt="User" class="user-avatar"><div class="user-info"><h5>Aarav Patel</h5><p>Network Owner</p></div></div>
+                </div>
+                <div class="review-card">
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="review-text">"The game panel is so clean and easy to use. I was able to install PaperMC and set up my plugins in literally 5 minutes. Support answered my ticket in under 10 minutes too!"</p>
+                    <div class="user-profile"><img src="https://i.pravatar.cc/150?img=47" alt="User" class="user-avatar"><div class="user-info"><h5>Sarah Jenkins</h5><p>Community Manager</p></div></div>
+                </div>
+                <div class="review-card">
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="review-text">"We get hit by DDoS attacks weekly by rival networks, but Nexora's protection has completely mitigated it. Players don't even notice when an attack is happening."</p>
+                    <div class="user-profile"><img src="https://i.pravatar.cc/150?img=33" alt="User" class="user-avatar"><div class="user-info"><h5>Michael T.</h5><p>Factions Server Dev</p></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section reveal" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Got questions? We've got answers. If you can't find what you're looking for, join our Discord.</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item" onclick="this.classList.toggle('active')"><div class="faq-question">How long does setup take? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer"><br>Setup is entirely instant. As soon as your invoice is paid, our automated system provisions your server and emails you the login details within 60 seconds.<br><br></div></div>
+                <div class="faq-item" onclick="this.classList.toggle('active')"><div class="faq-question">Can I upgrade my plan later? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer"><br>Yes! You can upgrade or downgrade your plan at any time directly from the billing area. You only pay the prorated difference.<br><br></div></div>
+                <div class="faq-item" onclick="this.classList.toggle('active')"><div class="faq-question">What payment methods do you accept? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer"><br>We accept all major Credit/Debit Cards, PayPal, UPI, and various Cryptocurrencies.<br><br></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta reveal">
+        <div class="container">
+            <div class="cta-box">
+                <h2>Ready to start your adventure?</h2>
+                <p>Join thousands of other players and server owners on the most reliable hosting platform.</p>
+                <a href="https://discord.gg/7bCXccejH9" target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding: 1rem 2.5rem; font-size: 1.1rem; display: inline-block;">Deploy Your Server Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fat Footer -->
+    <footer class="site-footer reveal" style="border-top: 1px solid var(--border-color); padding: 5rem 0 2rem 0; background: #010103;">
+        <div class="container">
+            <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-bottom: 4rem;">
+                <div class="footer-brand" style="grid-column: span 2;">
+                    <a href="/" class="logo" style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fa-solid fa-cloud"></i> NexoraCloud
+                    </a>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; max-width: 350px;">
+                        Enterprise-grade gaming infrastructure designed for Minecraft and game server communities. Enjoy reliable, high-performance hardware, and real-time DDoS protection without any setup delays.
+                    </p>
+                    <div class="footer-socials" style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                        <a href="https://discord.gg/7bCXccejH9" target="_blank" rel="noopener noreferrer" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; color: var(--text-main); transition: var(--transition);"><i class="fa-brands fa-discord"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col" style="display: flex; flex-direction: column;">
+                    <h4 style="font-size: 1.1rem; margin-bottom: 1.5rem; font-weight: 600; color: var(--text-main);">Services</h4>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.8rem;">
+                        <li><a href="#pricing" style="color: var(--text-muted); font-size: 0.85rem; transition: var(--transition);">Basic Plans</a></li>
+                        <li><a href="#pricing" style="color: var(--text-muted); font-size: 0.85rem; transition: var(--transition);">EPYC Servers</a></li>
+                        <li><a href="#pricing" style="color: var(--text-muted); font-size: 0.85rem; transition: var(--transition);">Ryzen Servers</a></li>
+                        <li><a href="https://discord.gg/7bCXccejH9" style="color: var(--text-muted); font-size: 0.85rem; transition: var(--transition);">Custom Solutions</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col" style="display: flex; flex-direction: column;">
+                    <h4 style="font-size: 1.1rem; margin-bottom: 1.5rem; font-weight: 600; color: var(--text-main);">Support</h4>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.8rem;">
+                        <li><a href="https://discord.gg/7bCXccejH9" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted); font-size: 0.85rem; transition: var(--transition);">Join Support Discord</a></li>
+                        <li><a href="#faq" style="color: var(--text-muted); font-size: 0.85rem; transition: var(--transition);">General Help & FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom" style="border-top: 1px solid var(--border-color); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 0.85rem; flex-wrap: wrap; gap: 1.5rem;">
+                <p>&copy; 2026 NexoraCloud Infrastructure. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab switching logic for Vanilla JS
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        // Scroll Reveal logic
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        setTimeout(() => document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('active')), 100);
+    </script>
+</body>
+</html>
